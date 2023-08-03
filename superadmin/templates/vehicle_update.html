@@ -1,0 +1,51 @@
+{% extends 'home.html' %}
+{% block super %}
+{% load static %}
+<form method="post" class="ml-5" >
+    {% csrf_token %}
+   <h3 class="fw-normal  text-center" style="letter-spacing: 1px;font-family: 'Times New Roman', Times, serif;font-weight: bold;">Vehicle Details</h3>
+  <br>
+   <div class="row" style="width:100%">
+   <div class="col " >
+           <div class="row">
+           <div class="col">
+            <div class="form-outline mb-2">
+               {{form.number.error}}                                
+               {{form.number}}
+             </div>
+           </div>        
+       </div>   
+   <div class="row">
+       <div class="col">
+           <div class="mb-3">
+           {{form.type.error}} 
+           {{form.type}}
+         </div>
+       </div>
+   </div>
+   <div class="row">
+       <div class="col">
+           <div class="form-outline mb-3">
+               {{form.model.error}} 
+               {{form.model}}
+             </div>
+       </div>
+   </div>
+   <div class="row">
+       <div class="col">
+           <div class="form-outline mb-3">
+               {{form.description.error}} 
+               {{form.description}}
+             </div>
+       </div>
+   </div>
+   <div class="pt-1 mb-2 text-center">
+     <button  class="btn btn-info btn-block" type="submit"   >Confirm</button>
+   </div>
+   </div>
+   </div>
+  
+ </form>
+
+
+{% endblock super %}

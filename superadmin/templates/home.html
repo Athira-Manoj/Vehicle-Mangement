@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+ 
+  </head>
+  <body>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+     <main class="main">
+      <aside class="sidebar">
+        <nav class="nav">
+         <div class="profile text-center" style="margin-left: 50px;">
+              <img class="card-img-top rounded-circle" src="{% static 'img/demo1.png' %}" alt="Card image cap" style="height: 150px;width: 150px;">
+              <h1 ><a class="text-light " href="">{{ request.user.username|capfirst}}</a></h1>  
+             </div>
+          <ul>
+            <li class="active" ><a href="{% url 'sa' %}">HOME</a></li>
+            <li class="active"><a href="{% url 'add' %}">ADD Vehicle</a></li>
+            <li class="active"><a href="{% url 'log' %}">LOGOUT</a></li>
+          </ul>
+        </nav>
+      </aside>
+    
+      <section class="twitter">
+        
+          {% block super %}
+          <div class="card mt-2 ml-2  " style="width:98%">
+            <div class="row" style="font-weight: bold;font-size:x-large;">
+              <div class="col text-center mt-2 mb-2 ml-1" >Vehicle Number</div>
+              <div class="col text-center mt-2">Type</div>
+              <div class="col text-center mt-2">Model</div>
+              <div class="col text-center mt-2">Description</div>
+             <div class="col"></div> 
+          </div>   
+        </div>
+          {% for i in data %}
+          <div class="card mt-2 ml-1" style="width:98%">
+            <div class="row ">
+              <div class="col text-center mt-2" >{{i.number|upper}}</div>
+              <div class="col text-center mt-2">{{i.type}}</div>
+              <div class="col text-center mt-2">{{i.model|capfirst}}</div>
+              <div class="col-2 text-center mt-2">{{i.description|capfirst}}</div>
+              <div class="col mt-1 mb-1">      
+                <a href="{% url 'upd' i.id %}" class="card-link btn btn-warning"   type="button">Update</a>
+               <a href="{% url 'del' i.id %}" class="card-link btn btn-danger" type="button">Delete</a></div>          
+          </div>
+          </div>
+         {% endfor %}
+         {% endblock super %}          
+      </section>
+    </main>
+
+  </body>
+</html>
